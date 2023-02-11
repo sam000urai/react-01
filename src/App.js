@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-
 function App() {
   const handleClick = () => {
     window.alert("Hello World");
@@ -13,6 +11,7 @@ function App() {
         </p>
       </header>
     </div>
+    
   );
-}
+} 
 export default App;
