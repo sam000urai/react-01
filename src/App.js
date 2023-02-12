@@ -1,39 +1,21 @@
 import React, { useState } from 'react';
 import './App.css';
-
-const App = () => {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(count + 1);
-    console.log(count);
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  const [names, setNames] = useState([]);
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-    setNames([...names, "satake"]);
-  };
-
+import Card from './Card';
+const sampleArray = [
+  { id: 1, name: 'aaa', date: 19920527 },
+  { id: 2, name: 'bbb', date: 19920528 },
+  { id: 3, name: 'ccc', date: 19920529 },
+  { id: 4, name: 'ddd', date: 19920531 },
+  { id: 5, name: 'eee', date: 19920501 }
+];
+function App() {
   return (
     <div>
-      <button onClick={increment}>いいね！</button>
-      <p>{count}</p>
-
-      <button onClick={decrement}>よくないね！</button>
-      <p>{count}</p>
-
-      <button onClick={() => setCount(0)}>Reset</button>
-
-      <p>{names}</p>
-      <button onClick={handleAdd}>Add</button>
+      {sampleArray.map((data) => {
+        console.log(data);
+        return <Card key={data.id} id={data.id} name={data.name} date={data.date} />;
+      })}
     </div>
   );
 }
-
 export default App;
