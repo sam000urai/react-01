@@ -10,12 +10,24 @@ const sampleArray = [
 ];
 function App() {
   return (
-    <div>
-      {sampleArray.map((data) => {
-        console.log(data);
-        return <Card key={data.id} id={data.id} name={data.name} date={data.date} />;
-      })}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sampleArray.map((data) => (
+          <tr key={data.id}>
+            <td>{data.id}</td>
+            <td>{data.name}</td>
+            <td>{data.date}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 export default App;
