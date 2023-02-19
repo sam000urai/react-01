@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 const ComponentA = () => {
     const [count, setCount] = useState(0);
+
+    const handleClick = () => {
+        setCount(count + 1);
+    };
 
     useEffect(() => {
         console.log('useEffect が呼び出されました。');
@@ -15,16 +20,15 @@ const ComponentA = () => {
 
     return (
         <div>
-            <p>
-                <div><h1>Menu</h1></div>
-                <Link to="/">Home</Link>
-                <br />
-                <Link to="/components/componentb">ComponentB</Link>
-                <br />
-                <Link to="/components/componentc">ComponentC</Link>
-                <br />
-                <div>count : {count}</div>
-            </p>
+            <h1>Menu</h1>
+            <Link to="/">Home</Link>
+            <br />
+            <Link to="/components/componentb">ComponentB</Link>
+            <br />
+            <Link to="/components/componentc">ComponentC</Link>
+            <br />
+            <div>count : {count}</div>
+            <Button onClick={handleClick}>+</Button>
         </div>
     );
 };
