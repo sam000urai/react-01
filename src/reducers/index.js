@@ -13,7 +13,8 @@ const reducer = (state = [], action) => {
             return [];
 
         case INCREMENT:
-            return { ...state, count: state.count + 1 };
+            const incrementValue = state.count % 3 === 0 && state.count !== 0 ? 10 : 1;
+            return { ...state, count: state.count + incrementValue };
 
         case DECREMENT:
             return { ...state, count: state.count - 1 };
