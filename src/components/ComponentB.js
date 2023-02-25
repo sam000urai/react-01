@@ -1,15 +1,15 @@
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ADD_EVENT } from '../actions/index';
+import { ADD_EVENT, ALL_DELETE } from '../actions/index';
 import reducer from '../reducers/index';
-import { Button, Form, Table } from 'reactbootstrap';
+import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ComponentB = () => {
     const [state, dispatch] = useReducer(reducer, []);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const handleClick = (e) => {
+    const addevent_handler = (e) => {
         e.preventDefault();
         dispatch({
             type: ADD_EVENT,
@@ -19,6 +19,18 @@ const ComponentB = () => {
         setTitle('');
         setBody('');
     };
+
+    const alldelete_handler = (e) => {
+        e.preventDefault();
+        dispatch({
+            type: ALL_DELETE,
+            title,
+            body
+        });
+        setTitle('');
+        setBody('');
+    };
+
     return (
         <div>
             <div>ComponentB</div>
@@ -40,10 +52,10 @@ const ComponentB = () => {
                         onChange={(e) => setBody(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" onClick={handleClick}>
+                <Button variant="primary" onClick={addevent_handler}>
                     イベント作成
                 </Button>
-                <Button variant="danger" onClick={handleClick}>
+                <Button variant="danger" onClick={alldelete_handler}>
                     イベント全削除
                 </Button>
             </Form>
