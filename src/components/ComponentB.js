@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ADD_EVENT, ALL_DELETE } from '../actions/index';
+import { ADD_EVENT, ALL_DELETE, DELETE_EVENT } from '../actions/index';
 import reducer from '../reducers/index';
 import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,15 +9,25 @@ const ComponentB = () => {
     const [state, dispatch] = useReducer(reducer, []);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [comment, setComment] = useState('');
     const addevent_handler = (e) => {
         e.preventDefault();
         dispatch({
             type: ADD_EVENT,
             title,
-            body
+            body,
+            comment
         });
         setTitle('');
         setBody('');
+        setComment('');
+    };
+
+    const deleteevent_handler = (id) => {
+        dispatch({
+            type: DELETE_EVENT,
+            id: id
+        });
     };
 
     const alldelete_handler = (e) => {
@@ -25,11 +35,15 @@ const ComponentB = () => {
         dispatch({
             type: ALL_DELETE,
             title,
-            body
+            body,
+            comment
         });
         setTitle('');
         setBody('');
+        setComment('');
     };
+
+
 
     return (
         <div>
@@ -51,13 +65,22 @@ const ComponentB = () => {
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                     />
+                    <Form.Label>Comment</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
                 </Form.Group>
+
                 <Button variant="primary" onClick={addevent_handler}>
                     イベント作成
                 </Button>
                 <Button variant="danger" onClick={alldelete_handler}>
                     イベント全削除
                 </Button>
+
             </Form>
 
             <h1>Table</h1>
@@ -67,6 +90,7 @@ const ComponentB = () => {
                         <th>id</th>
                         <th>title</th>
                         <th>body</th>
+                        <th>comment</th>
                         <th>#</th>
                     </tr>
                 </thead>
@@ -77,8 +101,11 @@ const ComponentB = () => {
                                 <td>{data.id}</td>
                                 <td>{data.title}</td>
                                 <td>{data.body}</td>
+                                <td>{data.comment}</td>
                                 <td>
-                                    <Button variant="danger">削除</Button>
+                                    <Button variant="danger" onClick={() => deleteevent_handler(data.id)}>
+                                        削除
+                                    </Button>
                                 </td>
                             </tr>
                         );
