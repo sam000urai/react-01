@@ -1,49 +1,46 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Table } from 'react-bootstrap';
+import reducer from '../reducers/index';
 
-function ComponentC() {
-    const [comments, setComments] = useState([]);
+const initialCount = {
+    count: 0
+};
 
-    const handleClick = async () => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/comments');
-        const data = await response.json();
-        setComments(data);
+const ComponentC = () => {
+    const [state, dispatch] = useReducer(reducer, initialCount);
+
+    const increment = () => {
+        console.log('increment');
+        dispatch({
+            type: 'INCREMENT'
+        });
+    };
+
+    const decrement = () => {
+        console.log('decrement');
+        dispatch({
+            type: 'DECREMENT'
+        });
+    };
+
+    const reset = () => {
+        console.log('reset');
+        dispatch({
+            type: 'RESET',
+            payload: { count: initialCount.count }
+        });
     };
 
     return (
         <div>
-            <div>
-                <Link to="/">ComponentAへ移動</Link>
-            </div>
-            <div>
-                <Link to="/components/componentb">ComponentBへ移動</Link>
-            </div>
-            <Button onClick={handleClick}>Get Data</Button>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>postId</th>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>email</th>
-                        <th>body</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {comments.map(comment => (
-                        <tr key={comment.id}>
-                            <td>{comment.postId}</td>
-                            <td>{comment.id}</td>
-                            <td>{comment.name}</td>
-                            <td>{comment.email}</td>
-                            <td>{comment.body}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            <div>ComponentC</div>
+            <Link to="/">ComponentAへ移動</Link>
+            <button onClick={increment}>+</button>
+            <button onClick={decrement}>-</button>
+            <button onClick={reset}>Reset</button>
+            <h1>{state.count}</h1>
         </div>
     );
-}
+};
 
 export default ComponentC;
