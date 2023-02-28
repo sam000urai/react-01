@@ -1,4 +1,6 @@
-import { ADD_EVENT, ALL_DELETE, DELETE_EVENT, INCREMENT, DECREMENT, RESET } from '../actions/index';
+import { ADD_EVENT, ALL_DELETE, DELETE_EVENT, INCREMENT, DECREMENT, RESET }
+    from '../actions/index';
+
 const reducer = (state = [], action) => {
     switch (action.type) {
         case ADD_EVENT:
@@ -24,6 +26,7 @@ const reducer = (state = [], action) => {
 
         default:
             return state;
+
 
     }
 };
