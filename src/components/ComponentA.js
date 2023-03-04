@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import { Store } from '../store';
+import { Store, SET_TODOS } from '../store';
 
 const ComponentA = () => {
     const [count, setCount] = useState(0);
-    const { globalState, setGlobalState } = useContext(Store);
+    const { setGlobalState } = useContext(Store);
 
     const handleClick = () => {
         setCount(count + 1);
@@ -16,9 +16,15 @@ const ComponentA = () => {
         console.log('useEffect が呼び出されました。');
         axios.get('https://jsonplaceholder.typicode.com/todos')
             .then(res => {
-                setGlobalState({ type: 'SET_TODOS', todos: res.data });
+                setGlobalState({
+                    type: SET_TODOS,
+                    payload: res.data
+                });
             })
-    }, []);
+            .catch(err => {
+                console.log(err);
+            });
+    }, [setGlobalState]);
 
     return (
         <div>

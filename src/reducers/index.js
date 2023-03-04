@@ -1,4 +1,4 @@
-import { ADD_EVENT, ALL_DELETE, DELETE_EVENT, INCREMENT, DECREMENT, RESET }
+import { ADD_EVENT, ALL_DELETE, DELETE_EVENT, INCREMENT, DECREMENT, RESET, ADD_TODO }
     from '../actions/index';
 
 const reducer = (state = [], action) => {
@@ -23,6 +23,9 @@ const reducer = (state = [], action) => {
 
         case RESET:
             return { ...state, count: 0 };
+
+        case ADD_TODO:
+            return { ...state, todos: [...state.todos, action.payload] };
 
         default:
             return state;

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Store } from '../store/index';
 import { INCREMENT, DECREMENT, RESET } from '../actions/index';
 import { Button, ListGroup } from 'react-bootstrap';
-import ComponentA from './ComponentA';
 
 const ComponentE = () => {
   const { globalState, setGlobalState } = useContext(Store);
@@ -29,12 +28,13 @@ const ComponentE = () => {
       <Button onClick={increment_handler}>+1</Button>
       <Button onClick={decrement_handler}>-1</Button>
       <Button onClick={reset_handler}>RESET</Button>
+
       <ListGroup>
         {globalState.todos.map((todo) => (
           <ListGroup.Item key={todo.id}>{todo.title}</ListGroup.Item>
         ))}
       </ListGroup>
-      <ComponentA />
+
     </div>
   );
 };
